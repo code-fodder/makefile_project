@@ -8,6 +8,9 @@ x86Linux_cpp: LFLAGS += -lstdc++ $(CFLAGS)
 x86Linux_cpp: AR_FLAGS += rcs
 x86Linux_cpp: build
 
+# include the auto generated dependecies targets
+-include $(DEPS)
+
 #.PHONEY: build
 build: print create_dirs $(OBJECTS)
 	@echo Linking
