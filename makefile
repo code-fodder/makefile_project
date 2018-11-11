@@ -11,6 +11,8 @@ PROJECT_NAME = state_machine_tester
 SOURCE_DIRS = \
 	src \
 	src/test_subdir
+	
+PROJECT_DEPS = hadamard
 
 # Requires the hadamard library
 LIB_PATHS = -Lhadamard/lib

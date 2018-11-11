@@ -38,6 +38,7 @@ LFLAGS =
 LIB_PATHS = 
 LIB_DEPS = 
 DEFINES = 
-
+# These are dependencies on other makefile projects
+PROJECT_DEPS =
 
 

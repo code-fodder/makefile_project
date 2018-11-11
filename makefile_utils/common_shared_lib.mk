@@ -1,5 +1,4 @@
 # SHARED LIBRARY CONFIG
-$(info building shared library)
 CFLAGS += -fPIC
 LFLAGS += -shared
 OUTPUT_DIR = $(LIB_DIR)

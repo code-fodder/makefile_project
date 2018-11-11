@@ -11,5 +11,3 @@ build_cpp_x86Linux: LFLAGS += $(CFLAGS)
 build_cpp_x86Linux: AR_FLAGS += rcs
 build_cpp_x86Linux: build
 #-lstdc++
-
-$(info target is: $(TARGET_NAME))
