@@ -1,6 +1,7 @@
 #include <iostream>
 #include "state_machine.h"
 #include "state_start.h"
+#include "../hadamard/hadamard.h"
 
 int main()
 {
@@ -17,6 +18,9 @@ int main()
 //    sm.process_event(ev_start);
 //    sm.process_event(ev_middle);
 //    sm.process_event(ev_test1);
+
+	// Run the hadamard linked shared lib function:
+	hadamard * p_had = new hadamard(5);
 
 // This is to force profiling / memcheck issues... probably remove this now...
 #if 0

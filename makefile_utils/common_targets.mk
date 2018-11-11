@@ -6,9 +6,10 @@
 build_cpp_x86Linux: TARGET_NAME = x86Linux_cpp
 build_cpp_x86Linux: CC = g++
 build_cpp_x86Linux: AR = ar
-build_cpp_x86Linux: CFLAGS += -std=c++11 $(CPP_HOST_WARNINGS)
-build_cpp_x86Linux: LFLAGS += -lstdc++ $(CFLAGS)
+build_cpp_x86Linux: CFLAGS += -std=c++11 $(FLAGS_CPP_HOST_WARNINGS)
+build_cpp_x86Linux: LFLAGS += $(CFLAGS)
 build_cpp_x86Linux: AR_FLAGS += rcs
 build_cpp_x86Linux: build
+#-lstdc++
 
 $(info target is: $(TARGET_NAME))

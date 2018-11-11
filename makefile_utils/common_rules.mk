@@ -6,13 +6,13 @@ CFLAGS += -MMD
 #.PHONEY: build
 build: print create_dirs $(OBJECTS)
 	@echo Linking
-	$(CC) $(LFLAGS) $(OBJECTS) -o $(BIN_DIR)/$(PROJECT_NAME)
+	$(CC) $(LFLAGS) $(OBJECTS) -o $(OUTPUT_DIR)/$(OUTPUT_FILE) $(LIB_PATHS) $(LIB_DEPS)
 	@echo build complete
 
 # Compiling each file
 $(OBJECT_DIR)/%.o: %.cpp
 	@echo "compiling $(RULE_DEPENDENCY)"
-	@$(CC) $(CFLAGS) -c $(RULE_DEPENDENCY) -o $(RULE_TARGET)
+	$(CC) $(CFLAGS) $(DEFINES) -c $(RULE_DEPENDENCY) -o $(RULE_TARGET)
 
 # Clean
 .PHONEY: clean

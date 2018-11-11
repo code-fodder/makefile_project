@@ -11,4 +11,4 @@ OBJECTS = $(addprefix $(OBJECT_DIR)/,$(addsuffix .o,$(basename $(patsubst %,%,$(
 DEPS = $(OBJECTS:%.o=%.d)
 
 # Generate the output directories list (used for creating/cleaning output dirs
-OUTPUT_DIRS = $(BIN_DIR) $(OBJECT_DIR) $(addprefix $(OBJECT_DIR)/,$(SOURCE_DIRS))
+OUTPUT_DIRS = $(OUTPUT_DIR) $(OBJECT_DIR) $(addprefix $(OBJECT_DIR)/,$(SOURCE_DIRS))

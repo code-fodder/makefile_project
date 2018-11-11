@@ -172,7 +172,7 @@ void hadamard::generate_code_words(size_t hadamard_size, size_t code_index)
 	printf("\r\n");
 }
 
-
+#if !defined (NO_MAIN)
 int main()
 {
 	// Test code...
@@ -190,4 +190,4 @@ int main()
 	printf("\r\ndone\r\n");
 	return 0;
 }
-
+#endif

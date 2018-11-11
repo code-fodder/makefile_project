@@ -18,18 +18,26 @@ SOURCES =
 HEADERS =
 
 # Outputs
-PROJECT_NAME ?= out
+PROJECT_NAME = out
 OBJECT_DIR = obj
 OBJECTS =
 DEPS =
 BIN_DIR = bin
+LIB_DIR = lib
+OUTPUT_DIR = $(BIN_DIR)
+OUTPUT_FILE = $(PROJECT_NAME)
 
 # Build variables
 TARGET_NAME = none
+# exe or shared (lib)
+TARGET_TYPE = exe
 CC = gcc
 AR = ar
 CFLAGS =
 LFLAGS =
-AR_FLAGS =
+LIB_PATHS = 
+LIB_DEPS = 
+DEFINES = 
+
 
 
