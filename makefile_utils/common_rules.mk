@@ -1,14 +1,41 @@
-# Generate sources list for cpp, cxx and c files
-SOURCES = $(foreach dir,$(SOURCE_DIRS),$(wildcard $(dir)/*.cpp $(dir)/*.cxx $(dir)/*.c))
+# -MMD is a compiler flag which tells the compiler to generate the dependacy lists for each object.
+CFLAGS += -MMD
+# include the auto generated dependecies targets
+-include $(DEPS)
 
-# Generate headers list for hpp, hxx and h files
-HEADERS = $(foreach dir,$(SOURCE_DIRS),$(wildcard $(dir)/*.hpp $(dir)/*.hxx $(dir)/*.h))
+#.PHONEY: build
+build: print create_dirs $(OBJECTS)
+	@echo Linking
+	$(CC) $(LFLAGS) $(OBJECTS) -o $(BIN_DIR)/$(PROJECT_NAME)
+	@echo build complete
 
-# Generate objects list from the sources list prefixed with the object dir
-OBJECTS = $(addprefix $(OBJECT_DIR)/,$(addsuffix .o,$(basename $(patsubst %,%,$(SOURCES)))))
+# Compiling each file
+$(OBJECT_DIR)/%.o: %.cpp
+	@echo "compiling $(RULE_DEPENDENCY)"
+	@$(CC) $(CFLAGS) -c $(RULE_DEPENDENCY) -o $(RULE_TARGET)
 
-# Generate dependency files list. The compiler creates these (-MMD flag) same as obj file with a .d extension
-DEPS = $(OBJECTS:%.o=%.d)
+# Clean
+.PHONEY: clean
+clean:
+	$(RM) $(OUTPUT_DIRS)
 
-# Generate the output directories list (used for creating/cleaning output dirs
-OUTPUT_DIRS = $(BIN_DIR) $(OBJECT_DIR) $(addprefix $(OBJECT_DIR)/,$(SOURCE_DIRS))
+# Create output directories
+.PHONEY: create_dirs
+create_dirs: $(OUTPUT_DIRS)
+$(OUTPUT_DIRS):
+	@$(MAKE_DIR) $(RULE_TARGET)
+
+# Print the variables
+VARS := $(filter-out $(VARS_OLD) VARS_OLD,$(.VARIABLES))
+.PHONEY: print_start print
+print: print_start $(VARS)
+	@echo "------------------------------------------"
+print_start:
+	@echo "------------------------------------------"
+	@printf "%-30s " "Variable"
+	@echo "Value"
+	@echo "------------------------------------------"
+$(VARS):
+	@printf "%-30s " $(RULE_TARGET)
+	@echo "$($(RULE_TARGET))"
+

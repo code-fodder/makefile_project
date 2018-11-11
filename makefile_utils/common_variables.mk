@@ -2,10 +2,11 @@
 # this copy before we set any variables so that we can filter those variables 
 # out later and just print the new variables we have set.
 VARS_OLD := $(.VARIABLES)
+VARS_OLD := $(filter-out CC AR,$(VARS_OLD))
 
 # Just for me so I can read my own makefile :o
-THE_TARGET = $@
-THE_DEPENDENCY = $<
+RULE_TARGET = $@
+RULE_DEPENDENCY = $<
 
 #Commands
 MAKE_DIR = mkdir -p
@@ -19,15 +20,16 @@ HEADERS =
 # Outputs
 PROJECT_NAME ?= out
 OBJECT_DIR = obj
-OBJECT_SUB_DIRS =
 OBJECTS =
 DEPS =
 BIN_DIR = bin
 
 # Build variables
+TARGET_NAME = none
 CC = gcc
 AR = ar
-# -MMD is a compiler flag which tells the compiler to generate the dependacy lists for each object.
-CFLAGS = -MMD
-LFLAGS = 
+CFLAGS =
+LFLAGS =
 AR_FLAGS =
+
+

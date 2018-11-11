@@ -1,2 +1,3 @@
-CPP_HOST_WARNINGS = -Wall -Wextra -Werror
-C_HOST_WARNINGS   = -Wall -Wextra -Werror
+CXX_WARNINGS_BASE = -Wall -Wextra -Werror
+CPP_HOST_WARNINGS = $(CXX_WARNINGS_BASE)
+C_HOST_WARNINGS   = $(CXX_WARNINGS_BASE)

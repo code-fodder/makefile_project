@@ -1,49 +1,14 @@
-# c++ compiler
-.PHONEY: x86Linux_cpp
-x86Linux_cpp: TARGET_NAME = x86Linux_cpp
-x86Linux_cpp: CC := g++
-x86Linux_cpp: AR = ar
-x86Linux_cpp: CFLAGS += -std=c++11
-x86Linux_cpp: LFLAGS += -lstdc++ $(CFLAGS)
-x86Linux_cpp: AR_FLAGS += rcs
-x86Linux_cpp: build
+# Set the default target if not already set - this allows the makefile to overule it
+.DEFAULT_GOAL ?= build_cpp_x86Linux
 
-# include the auto generated dependecies targets
--include $(DEPS)
+# Linux x86 c++ compiler
+.PHONEY: build_cpp_x86Linux
+build_cpp_x86Linux: TARGET_NAME = x86Linux_cpp
+build_cpp_x86Linux: CC = g++
+build_cpp_x86Linux: AR = ar
+build_cpp_x86Linux: CFLAGS += -std=c++11 $(CPP_HOST_WARNINGS)
+build_cpp_x86Linux: LFLAGS += -lstdc++ $(CFLAGS)
+build_cpp_x86Linux: AR_FLAGS += rcs
+build_cpp_x86Linux: build
 
-#.PHONEY: build
-build: print create_dirs $(OBJECTS)
-	@echo Linking
-	$(CC) $(LFLAGS) $(OBJECTS) -o $(BIN_DIR)/$(PROJECT_NAME)
-	@echo build complete
-
-# Compiling each file
-$(OBJECT_DIR)/%.o: %.cpp
-	@echo "compiling $(THE_DEPENDENCY)"
-	@$(CC) $(CFLAGS) -c $(THE_DEPENDENCY) -o $(THE_TARGET)
-
-# Clean
-.PHONEY: clean
-clean:
-	$(RM) $(OUTPUT_DIRS)
-
-# Create output directories
-.PHONEY: create_dirs
-create_dirs: $(OUTPUT_DIRS)
-$(OUTPUT_DIRS):
-	@$(MAKE_DIR) $(THE_TARGET)
-
-# Print the variables
-VARS := $(filter-out $(VARS_OLD) VARS_OLD,$(.VARIABLES))
-.PHONEY: print_start print
-print: print_start $(VARS)
-	@echo "------------------------------------------"
-print_start:
-	@echo "------------------------------------------"
-	@printf "%-30s " "Variable"
-	@echo "Value"
-	@echo "------------------------------------------"
-$(VARS):
-	@printf "%-30s " $(THE_TARGET)
-	@echo "$($(THE_TARGET))"
-
+$(info target is: $(TARGET_NAME))
